@@ -49,6 +49,7 @@ syn match i3ConfigColor /#\w\{6}/ contained
 syn match i3ConfigVariableModifier /+/ contained
 syn match i3ConfigVariableAndModifier /+\w\+/ contained contains=i3ConfigVariableModifier
 syn match i3ConfigVariable /\$\w\+\(\(-\w\+\)\+\)\?\(\s\|+\)\?/ contains=i3ConfigVariableModifier,i3ConfigVariableAndModifier
+syn match i3ConfigVariableStart /^\s*\$\w\+\(\(-\w\+\)\+\)\?\(\s\|+\)\?\s\+.*$/ contains=i3ConfigVariable,i3ConfigInitializeKeyword,i3ConfigColor,i3ConfigString
 syn keyword i3ConfigInitializeKeyword set contained
 syn match i3ConfigInitialize /^\s*set\s\+.*$/ contains=i3ConfigVariable,i3ConfigInitializeKeyword,i3ConfigColor,i3ConfigString
 
@@ -69,7 +70,7 @@ syn match i3ConfigUnit /\sp\(pt\|x\)/ contained
 syn match i3ConfigUnitOr /\sor/ contained
 syn keyword i3ConfigBindKeyword bindsym bindcode exec gaps border contained
 syn match i3ConfigBindArgument /--\w\+\(\(-\w\+\)\+\)\?\s/ contained
-syn match i3ConfigBind /^\s*\(bindsym\|bindcode\)\s\+.*$/ contains=i3ConfigVariable,i3ConfigBindKeyword,i3ConfigVariableAndModifier,i3ConfigNumber,i3ConfigUnit,i3ConfigUnitOr,i3ConfigBindArgument,i3ConfigModifier,i3ConfigAction,i3ConfigString,i3ConfigGapStyleKeyword,i3ConfigBorderStyleKeyword
+syn match i3ConfigBind /^\s*\(bindsym\|bindcode\|\$b\|gaps\)\s\+.*$/ contains=i3ConfigVariable,i3ConfigBindKeyword,i3ConfigVariableAndModifier,i3ConfigNumber,i3ConfigUnit,i3ConfigUnitOr,i3ConfigBindArgument,i3ConfigModifier,i3ConfigAction,i3ConfigString,i3ConfigGapStyleKeyword,i3ConfigBorderStyleKeyword
 
 " Floating
 syn keyword i3ConfigSizeSpecial x contained
@@ -254,6 +255,7 @@ hi! def link i3ConfigFocusOnActivationKeyword        Identifier
 hi! def link i3ConfigDrawingMarksKeyword             Identifier
 hi! def link i3ConfigBlockKeyword                    Identifier
 hi! def link i3ConfigVariable                        Statement
+hi! def link i3ConfigVariableStart                   None
 hi! def link i3ConfigArbitraryCommand                Type
 
 let b:current_syntax = "i3config"
